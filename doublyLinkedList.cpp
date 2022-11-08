@@ -57,6 +57,10 @@ public:
     {
         Node *newNode = new Node(x);
         newNode->next = head;
+        if (head != NULL)
+        {
+            head->previous = newNode;
+        }
         head = newNode;
     }
     Node *insertAtEnd(int x) // insert at end of list
@@ -67,6 +71,7 @@ public:
             currentNodePointer = currentNodePointer->next;
         }
         Node *newNode = new Node(x);
+        newNode->previous = currentNodePointer;
         currentNodePointer->next = newNode;
     }
     bool findNode(int x) // search for data value x in the list
@@ -92,19 +97,26 @@ public:
         {
             if (currentNode->value == x)
             {
-                currentNode->previous->next = currentNode->next;
-                currentNode->next->previous = currentNode->previous;
+                Node *previous = currentNode->previous;
+                Node *next = currentNode->next;
+                if (previous == NULL)
+                { // its mean the node is the first in the list
+                    head = next;
+                }
+                else
+                {
+                    previous->next = next;
+                    next->previous = previous;
+                }
             }
-            else
-            {
-                currentNode = currentNode->next;
-            }
+
+            currentNode = currentNode->next;
         }
     }
     bool deleteFromStart() // deletes starting node of list
     {
         head = head->next;
-        head->next->previous = NULL;
+        head->previous = NULL;
     }
     bool deleteFromEnd() // deletes last node of list
     {
@@ -133,18 +145,15 @@ public:
     }
     Node *reverseList()
     { // reverses the linklist and returns a new list
-        Node *previous = NULL;
         Node *current = head;
-        Node *next = current->next;
-        while (next != NULL)
+        while (current!=NULL)
         {
-            next = current->next;
-            current->next = previous;
-            previous = current;
-            current = next;
-            // next=current->next;
+            Node *temp=current->next;
+            current->next=current->previous;
+            current->previous=temp;
+            head=current;
+            current=temp;
         }
-        head = previous;
         return head;
     }
     Node *sortList(Node *list)
@@ -209,19 +218,21 @@ public:
             {
                 if (newhead == NULL)
                 {
-                    // currentCheckPointerList1->next;
                     newhead = currentCheckPointerList1;
                     newListPointer = newhead;
+                    newhead->previous=NULL;
                 }
                 else
                 {
                     newListPointer->next = currentCheckPointerList1;
+                    currentCheckPointerList1->previous=newListPointer;
                     newListPointer = currentCheckPointerList1;
                 }
                 //
             }
             currentCheckPointerList1 = nextList1Pointer;
         }
+        newListPointer->next=NULL;
         return newhead;
     }
 
@@ -283,11 +294,12 @@ main()
     // list->insertAtEnd(20);
     // list->insertAtEnd(30);
 
-    // LinkList *list2 = new LinkList();
-    // list2->insertAtHead(40);
-    // list2->insertAtEnd(20);
-    // list2->insertAtEnd(30);
-
+    LinkList *list2 = new LinkList();
+    list2->insertAtHead(40);
+    list2->insertAtEnd(30);
+    list2->insertAtEnd(20);
+    list2->head=list2->reverseList();
+    list2->displayList();
     // list->head=list->mergeLists(list->head,list2->head);
     // cout << "-------------------" << endl;
     // list->displayList();
@@ -299,6 +311,9 @@ main()
     // list->insertAtEnd(20);
     // list->insertAtEnd(30);
     // list->insertNode(0, 50);
+    // // list->deleteNode(20);
+    // // list->deleteFromStart();
+    // list->deleteFromEnd();
     // list->displayList();
 
     // _________________________________________________________________________________________________
