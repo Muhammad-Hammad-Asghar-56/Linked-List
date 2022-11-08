@@ -208,39 +208,31 @@ public:
     }
     Node *interestLists(Node *list1, Node *list2)
     { // results contains intersection of two lists
-        Node *newhead = NULL;
-        Node *newListPointer = NULL;
-        Node *currentCheckPointerList1 = list1;
+        LinkList *interestedList=new LinkList();
+        Node *currentCheckPointerList1=list1;
         while (currentCheckPointerList1 != NULL)
         {
-            Node *nextList1Pointer = currentCheckPointerList1->next;
             if (isValueExisted(currentCheckPointerList1, list2))
             {
-                if (newhead == NULL)
+                if (interestedList->head == NULL)
                 {
-                    newhead = currentCheckPointerList1;
-                    newListPointer = newhead;
-                    newhead->previous=NULL;
+                    interestedList->insertAtHead(currentCheckPointerList1->value);
                 }
                 else
                 {
-                    newListPointer->next = currentCheckPointerList1;
-                    currentCheckPointerList1->previous=newListPointer;
-                    newListPointer = currentCheckPointerList1;
+                    interestedList->insertAtEnd(currentCheckPointerList1->value);
                 }
-                //
             }
-            currentCheckPointerList1 = nextList1Pointer;
+            currentCheckPointerList1 = currentCheckPointerList1->next;
         }
-        newListPointer->next=NULL;
-        return newhead;
+        return interestedList->head;
     }
 
     // Helping Functions
     bool isValueExisted(Node *key, Node *list)
     {
         Node *currentNode = list;
-        while (currentNode->next != NULL && currentNode != key)
+        while (currentNode != NULL && currentNode != key)
         {
             if (currentNode->value == key->value)
             {
@@ -294,12 +286,10 @@ main()
     // list->insertAtEnd(20);
     // list->insertAtEnd(30);
 
-    LinkList *list2 = new LinkList();
-    list2->insertAtHead(40);
-    list2->insertAtEnd(30);
-    list2->insertAtEnd(20);
-    list2->head=list2->reverseList();
-    list2->displayList();
+    // LinkList *list2 = new LinkList();
+    // list2->insertAtHead(40);
+    // list2->insertAtEnd(30);
+    // list2->insertAtEnd(20);
     // list->head=list->mergeLists(list->head,list2->head);
     // cout << "-------------------" << endl;
     // list->displayList();
