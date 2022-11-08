@@ -146,13 +146,13 @@ public:
     Node *reverseList()
     { // reverses the linklist and returns a new list
         Node *current = head;
-        while (current!=NULL)
+        while (current != NULL)
         {
-            Node *temp=current->next;
-            current->next=current->previous;
-            current->previous=temp;
-            head=current;
-            current=temp;
+            Node *temp = current->next;
+            current->next = current->previous;
+            current->previous = temp;
+            head = current;
+            current = temp;
         }
         return head;
     }
@@ -175,6 +175,27 @@ public:
             }
             unSortedElement = unSortedElement->next;
         }
+    }
+    Node *sortByInsertionSort(Node *list)
+    {
+        Node *currentPointer = list;
+        while (currentPointer != NULL)
+        {
+            int value = currentPointer->value;
+            Node *previous = currentPointer->previous;
+            while (previous->next != NULL && value <= previous->value)
+            {
+                previous->next->value = previous->value;
+                previous = previous->previous;
+            }
+            if (previous->value <= value)
+            {
+                previous->next->value = previous->value;
+            }
+            previous->value=value;
+            currentPointer = currentPointer->next;
+        }
+        return NULL;
     }
     Node *removeDuplicates(Node *list)
     { // removes duplicates from list
@@ -208,8 +229,8 @@ public:
     }
     Node *interestLists(Node *list1, Node *list2)
     { // results contains intersection of two lists
-        LinkList *interestedList=new LinkList();
-        Node *currentCheckPointerList1=list1;
+        LinkList *interestedList = new LinkList();
+        Node *currentCheckPointerList1 = list1;
         while (currentCheckPointerList1 != NULL)
         {
             if (isValueExisted(currentCheckPointerList1, list2))
