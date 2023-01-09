@@ -242,6 +242,34 @@ public:
         }
         return false;
     }
+    void reorderList(Node* head) {
+        // [1,2,3,4,5,6]
+        // [1,6,2,3,4,5]
+        Node* pointer=head;
+        while (pointer->next != NULL)
+        {
+            Node* nextItem=pointer->next;
+            // get the last element
+            Node* lastNode=getLastElementAndRemove(pointer);
+            // adjust the pointers next to current pointer
+            lastNode->next=pointer->next;
+            // adjust the current pointer's next
+            pointer->next=lastNode;
+            pointer=nextItem;      
+        }
+    }
+    Node* getLastElementAndRemove(Node* head){
+        Node *pointer=head;
+        Node *prevPointer=NULL;
+        while(pointer->next!=NULL){
+            prevPointer=pointer;
+            pointer=pointer->next;
+        }
+        if(prevPointer!=NULL){
+            prevPointer->next=NULL;
+        }
+        return pointer;
+    }
 };
 main()
 {

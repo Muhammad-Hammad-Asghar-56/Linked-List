@@ -270,28 +270,28 @@ public:
         list2->previous = current;
         return list1;
     }
-    Node *interestLists(Node *list1, Node *list2)
-    { // results contains intersection of two lists
-        LinkList *interestedList = new LinkList();
-        Node *currentCheckPointerList1 = list1;
-        do
-        {
-            // if (isValueExisted(currentCheckPointerList1, list2))
-            if (isValueExisted(currentCheckPointerList1, list2))
-            {
-                if (interestedList->head == NULL)
-                {
-                    interestedList->insertAtHead(currentCheckPointerList1->value);
-                }
-                else
-                {
-                    interestedList->insertAtEnd(currentCheckPointerList1->value);
-                }
-            }
-            currentCheckPointerList1 = currentCheckPointerList1->next;
-        } while (currentCheckPointerList1 != head);
-        return interestedList->head;
-    }
+    // Node *interestLists(Node *list1, Node *list2)
+    // { // results contains intersection of two lists
+    //     LinkList *interestedList = new LinkList();
+    //     Node *currentCheckPointerList1 = list1;
+    //     do
+    //     {
+    //         // if (isValueExisted(currentCheckPointerList1, list2))
+    //         if (isValueExisted(currentCheckPointerList1, list2))
+    //         {
+    //             if (interestedList->head == NULL)
+    //             {
+    //                 interestedList->insertAtHead(currentCheckPointerList1->value);
+    //             }
+    //             else
+    //             {
+    //                 interestedList->insertAtEnd(currentCheckPointerList1->value);
+    //             }
+    //         }
+    //         currentCheckPointerList1 = currentCheckPointerList1->next;
+    //     } while (currentCheckPointerList1 != head);
+    //     return interestedList->head;
+    // }
 
     // Helping Functions
     bool isValueExisted(Node *key, Node *list)
@@ -335,20 +335,20 @@ public:
 main()
 {
     /*                                     Intersection */
-    LinkList *list = new LinkList();
-    list->insertAtHead(10);
-    list->insertAtEnd(20);
-    list->insertAtEnd(30);
+    // LinkList *list = new LinkList();
+    // list->insertAtHead(10);
+    // list->insertAtEnd(20);
+    // list->insertAtEnd(30);
 
-    LinkList *list2 = new LinkList();
-    list2->insertAtHead(40);
-    list2->insertAtEnd(20);
-    list2->insertAtEnd(30);
+    // LinkList *list2 = new LinkList();
+    // list2->insertAtHead(40);
+    // list2->insertAtEnd(20);
+    // list2->insertAtEnd(30);
 
-    Node *newlistHead = list->interestLists(list->head, list2->head);
-    LinkList *IntersectList = new LinkList(newlistHead);
-    cout << "-------------------" << endl;
-    IntersectList->displayList();
+    // Node *newlistHead = list->interestLists(list->head, list2->head);
+    // LinkList *IntersectList = new LinkList(newlistHead);
+    // cout << "-------------------" << endl;
+    // IntersectList->displayList();
     // _________________________________________________________________________________________________
     /*                                      Merge */
     // LinkList *list = new LinkList();

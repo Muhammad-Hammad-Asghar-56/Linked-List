@@ -317,15 +317,15 @@ main()
 
     // _________________________________________________________________________________________________
     /*                                      Insert At */
-    // LinkList *list = new LinkList();
-    // list->insertAtHead(10);
-    // list->insertAtEnd(20);
-    // list->insertAtEnd(30);
-    // list->insertNode(0, 50);
-    // // list->deleteNode(20);
-    // // list->deleteFromStart();
-    // list->deleteFromEnd();
-    // list->displayList();
+    LinkList *list = new LinkList();
+    list->insertAtHead(10);
+    list->insertAtEnd(20);
+    list->insertAtEnd(30);
+    list->insertNode(0, 50);
+    // list->deleteNode(20);
+    // list->deleteFromStart();
+    list->deleteFromEnd();
+    list->displayList();
 
     // _________________________________________________________________________________________________
     /*                                      Sort  */
